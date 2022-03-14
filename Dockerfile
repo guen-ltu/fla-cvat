@@ -18,7 +18,9 @@ RUN apt-get update && \
         pkg-config \
         python3-dev \
         python3-pip \
-        python3-venv && \
+        python3-venv \
+        libgeos-dev \
+        libpq-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Compile Openh264 and FFmpeg
@@ -45,6 +47,8 @@ RUN curl -sL https://ffmpeg.org/releases/ffmpeg-${FFMPEG_VERSION}.tar.bz2 --outp
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:${PATH}"
 RUN python3 -m pip install --no-cache-dir -U pip==22.0.2 setuptools==60.6.0 wheel==0.37.1
+# install tensorflow for aarch64
+RUN python3 -m pip install --no-cache-dir tensorflow -f https://tf.kmtea.eu/whl/stable.html
 COPY cvat/requirements/ /tmp/requirements/
 RUN DATUMARO_HEADLESS=1 python3 -m pip install --no-cache-dir -r /tmp/requirements/${DJANGO_CONFIGURATION}.txt
 
@@ -89,7 +93,9 @@ RUN apt-get update && \
         git-lfs \
         poppler-utils \
         ssh \
-        curl && \
+        curl \
+        libgeos-dev \
+        libpq-dev && \
     ln -fs /usr/share/zoneinfo/${TZ} /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata && \
     rm -rf /var/lib/apt/lists/* && \

@@ -1,10 +1,6 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "cvat.fullname" . -}}
-{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
-apiVersion: networking.k8s.io/v1beta1
-{{- else -}}
-apiVersion: extensions/v1beta1
-{{- end }}
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
@@ -27,18 +23,21 @@ spec:
   {{- end }}
 {{- end }}
   rules:
-  {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: fla-cvat.localdev.me
       http:
         paths:
-        {{- range .paths }}
-          - path: {{ .path }}
-            {{- if .pathType }}
-            pathType: {{ .pathType }}
-            {{- end }}
+          - path: "/api/.*|git/.*|tensorflow/.*|auto_annotation/.*|analytics/.*|static/.*|admin|admin/.*|documentation/.*|dextr/.*|reid/.*"
+            pathType: "Prefix"
             backend:
-              serviceName: {{ .service.name }}
-              servicePort: {{ .service.port }}
-        {{- end }}
-  {{- end }}
+              service:
+                name: cvat-backend-service
+                port:
+                  number: 8080
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: cvat-frontend-service
+                port:
+                  number: 80
 {{- end }}
