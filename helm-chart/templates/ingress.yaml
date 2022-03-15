@@ -40,4 +40,14 @@ spec:
                 name: cvat-frontend-service
                 port:
                   number: 80
+    - host: fla-pgadmin.localdev.me
+      http:
+        paths:
+          - path: "/"
+            pathType: "Prefix"
+            backend:
+              service:
+                name: pgadmin-service
+                port:
+                  number: 80
 {{- end }}

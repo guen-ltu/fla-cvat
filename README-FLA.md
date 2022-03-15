@@ -70,19 +70,23 @@ kubectl exec -it pod/cvat-backend-<pod-id> -c cvat-backend-app-container -- pyth
 ````
 
 
-## Run on K8 
+## Run on K8
 
 ````
 # from project root
 helm upgrade cvat --install ./helm-chart -f ./helm-chart/values.yaml
 
-# port forward to access from localhost
+# port forward to access from localhost ... not needed!
 kubectl port-forward service/ingress-nginx-controller 8080:80
 ````
 
-http://fla-cvat.localdev.me:8080/
-http://fla-cvat.localdev.me:8080/api/swagger/
-http://fla-cvat.localdev.me:8080/admin
+http://fla-cvat.localdev.me/
+http://fla-cvat.localdev.me/api/swagger/
+http://fla-cvat.localdev.me/admin
+
+http://fla-pgadmin.localdev.me
+user: admin@fla.com
+pass: SuperSecret
 
 
 ````
