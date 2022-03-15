@@ -88,6 +88,13 @@ http://fla-pgadmin.localdev.me
 user: admin@fla.com
 pass: SuperSecret
 
+http://fla-redis.localdev.me
+host: cvat-redis-master
+port: 6379
+name: fla-cvat (free of choice)
+username: (none/default)
+password: (none)
+
 
 ````
 # uninstall
