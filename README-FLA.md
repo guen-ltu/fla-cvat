@@ -27,6 +27,10 @@ docker push guenltu/private:fla-cvat-opa
 ````
 # add repo for helm dependencies; needed only once
 helm repo add bitnami https://charts.bitnami.com/bitnami
+
+# nuclio
+helm repo add nuclio https://nuclio.github.io/nuclio/charts
+
 helm repo list
 ````
 
@@ -94,6 +98,8 @@ port: 6379
 name: fla-cvat (free of choice)
 username: (none/default)
 password: (none)
+
+http://fla-nuclio.localdev.me
 
 
 ````

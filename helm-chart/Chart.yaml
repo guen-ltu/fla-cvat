@@ -33,3 +33,7 @@ dependencies:
     version: "10.3.*"
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
+  - name: nuclio
+    version: "0.11.*"
+    repository: https://nuclio.github.io/nuclio/charts
+    condition: nuclio.enabled
