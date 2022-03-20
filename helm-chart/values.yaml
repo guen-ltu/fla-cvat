@@ -35,7 +35,8 @@ cvat:
         ALLOWED_HOSTS: "*"
         DJANGO_MODWSGI_EXTRA_ARGS: ""
     additionalEnv: [
-      { name: CVAT_NUCLIO_HOST, value: cvat-nuclio-dashboard }
+      { name: CVAT_NUCLIO_HOST, value: cvat-nuclio-dashboard },
+      { name: CVAT_SERVERLESS, value: "true" }
     ]
     # Example:
     #  - name: volume-from-secret
