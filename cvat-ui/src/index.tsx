@@ -11,6 +11,7 @@ import { getAboutAsync } from 'actions/about-actions';
 import { authorizedAsync, loadAuthActionsAsync } from 'actions/auth-actions';
 import { getFormatsAsync } from 'actions/formats-actions';
 import { getModelsAsync } from 'actions/models-actions';
+import { getTrainModelsAsync } from 'actions/models-train-actions';
 import { getPluginsAsync } from 'actions/plugins-actions';
 import { switchSettingsDialog } from 'actions/settings-actions';
 import { shortcutsActions } from 'actions/shortcuts-actions';
@@ -58,6 +59,7 @@ interface DispatchToProps {
     verifyAuthorized: () => void;
     loadAbout: () => void;
     initModels: () => void;
+    initTrainModels: () => void;
     initPlugins: () => void;
     resetErrors: () => void;
     resetMessages: () => void;
@@ -111,6 +113,7 @@ function mapDispatchToProps(dispatch: any): DispatchToProps {
         loadUserAgreements: (): void => dispatch(getUserAgreementsAsync()),
         initPlugins: (): void => dispatch(getPluginsAsync()),
         initModels: (): void => dispatch(getModelsAsync()),
+        initTrainModels: (): void => dispatch(getTrainModelsAsync()),
         loadAbout: (): void => dispatch(getAboutAsync()),
         resetErrors: (): void => dispatch(resetErrors()),
         resetMessages: (): void => dispatch(resetMessages()),

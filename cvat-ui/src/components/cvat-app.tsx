@@ -63,6 +63,7 @@ interface CVATAppProps {
     loadUserAgreements: () => void;
     initPlugins: () => void;
     initModels: () => void;
+    initTrainModels: () => void;
     resetErrors: () => void;
     resetMessages: () => void;
     switchShortcutsDialog: () => void;
@@ -164,6 +165,7 @@ class CVATApplication extends React.PureComponent<CVATAppProps & RouteComponentP
             loadUserAgreements,
             initPlugins,
             initModels,
+            initTrainModels,
             loadOrganizations,
             loadAuthActions,
             userInitialized,
@@ -221,6 +223,7 @@ class CVATApplication extends React.PureComponent<CVATAppProps & RouteComponentP
 
         if (isModelPluginActive && !modelsInitialized && !modelsFetching) {
             initModels();
+            initTrainModels();
         }
 
         if (!pluginsInitialized && !pluginsFetching) {

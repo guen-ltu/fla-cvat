@@ -11,6 +11,7 @@ import ActionsMenuComponent, { Actions } from 'components/actions-menu/actions-m
 import { CombinedState } from 'reducers/interfaces';
 
 import { modelsActions } from 'actions/models-actions';
+import { modelsTrainActions } from 'actions/models-train-actions';
 import {
     loadAnnotationsAsync,
     deleteTaskAsync,
@@ -37,6 +38,7 @@ interface DispatchToProps {
     openRunModelWindow: (taskInstance: any) => void;
     exportTask: (taskInstance: any) => void;
     openMoveTaskToProjectWindow: (taskInstance: any) => void;
+    openTrainModelWindow: (taskInstance: any) => void;
 }
 
 function mapStateToProps(state: CombinedState, own: OwnProps): StateToProps {
@@ -79,6 +81,9 @@ function mapDispatchToProps(dispatch: any): DispatchToProps {
         openMoveTaskToProjectWindow: (taskId: number): void => {
             dispatch(switchMoveTaskModalVisible(true, taskId));
         },
+        openTrainModelWindow: (taskInstance: any): void => {
+            dispatch(modelsTrainActions.showTrainModelDialog(taskInstance));
+        },
     };
 }
 
@@ -95,6 +100,7 @@ function ActionsMenuContainer(props: OwnProps & StateToProps & DispatchToProps):
         openRunModelWindow,
         exportTask,
         openMoveTaskToProjectWindow,
+        openTrainModelWindow,
     } = props;
 
     function onClickMenu(params: MenuInfo): void {
@@ -111,6 +117,8 @@ function ActionsMenuContainer(props: OwnProps & StateToProps & DispatchToProps):
             exportTask(taskInstance);
         } else if (action === Actions.MOVE_TASK_TO_PROJECT) {
             openMoveTaskToProjectWindow(taskInstance.id);
+        } else if (action === Actions.RUN_TRAIN_MODEL) {
+            openTrainModelWindow(taskInstance);
         }
     }
 

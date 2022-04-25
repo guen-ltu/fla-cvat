@@ -35,6 +35,7 @@ export enum Actions {
     MOVE_TASK_TO_PROJECT = 'move_task_to_project',
     OPEN_BUG_TRACKER = 'open_bug_tracker',
     EXPORT_TASK = 'export_task',
+    RUN_TRAIN_MODEL = 'run_train_model',
 }
 
 function ActionsMenuComponent(props: Props): JSX.Element {
@@ -106,6 +107,9 @@ function ActionsMenuComponent(props: Props): JSX.Element {
             {!!bugTracker && <Menu.Item key={Actions.OPEN_BUG_TRACKER}>Open bug tracker</Menu.Item>}
             <Menu.Item disabled={inferenceIsActive} key={Actions.RUN_AUTO_ANNOTATION}>
                 Automatic annotation
+            </Menu.Item>
+            <Menu.Item disabled={inferenceIsActive} key={Actions.RUN_TRAIN_MODEL}>
+                Train Model
             </Menu.Item>
             <Menu.Item
                 key={Actions.EXPORT_TASK}

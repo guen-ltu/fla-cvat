@@ -321,6 +321,16 @@ export interface ModelsState {
     modelRunnerTask: any;
 }
 
+export interface ModelsTrainState {
+    initialized: boolean;
+    fetching: boolean;
+    creatingStatus: string;
+    detectors: Model[];
+    reid: Model[];
+    modelTrainIsVisible: boolean;
+    modelTrainTask: any;
+}
+
 export interface ErrorState {
     message: string;
     reason: string;
@@ -760,6 +770,7 @@ export interface CombinedState {
     userAgreements: UserAgreementsState;
     plugins: PluginsState;
     models: ModelsState;
+    modelsTrain: ModelsTrainState;
     notifications: NotificationsState;
     annotation: AnnotationState;
     settings: SettingsState;
