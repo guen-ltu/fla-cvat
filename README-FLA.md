@@ -6,12 +6,18 @@
 # from project root
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml build
 
+# building only the backend
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml build cvat
+
+# building only the frontend
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml build cvat_ui
+
 # re-tag and push
 docker tag <image-id> guenltu/private:fla-cvat-server-m1
 docker push guenltu/private:fla-cvat-server-m1
 
 docker tag <image-id> guenltu/private:fla-cvat-ui-m1
-    docker push guenltu/private:fla-cvat-ui-m1
+docker push guenltu/private:fla-cvat-ui-m1
 ````
 
 ````
@@ -88,6 +94,10 @@ http://fla-cvat.localdev.me/
 http://fla-cvat.localdev.me/api/swagger/
 http://fla-cvat.localdev.me/admin
 
+whaterever you set it before like
+user: admin
+pass: admin
+
 http://fla-pgadmin.localdev.me
 user: admin@fla.com
 pass: SuperSecret
@@ -106,6 +116,14 @@ http://fla-nuclio.localdev.me
 # uninstall
 helm uninstall cvat
 ````
+
+## Deploy Nuclio functions
+
+````
+# create Nuclio CVAT project
+nuctl create project cvat
+````
+
 
 
 ## Update repository from origin
