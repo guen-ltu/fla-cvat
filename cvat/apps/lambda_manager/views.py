@@ -46,7 +46,8 @@ class LambdaGateway:
             port or settings.NUCLIO['PORT'])
         extra_headers = {
             'x-nuclio-project-name': 'cvat',
-            'x-nuclio-function-namespace': 'nuclio',
+            # is needed, otherwise a kubernetes namespace has to be created
+            # 'x-nuclio-function-namespace': 'nuclio',
         }
         if headers:
             extra_headers.update(headers)
