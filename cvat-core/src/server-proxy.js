@@ -1363,6 +1363,21 @@
                 }
             }
 
+            async function runTraining(body) {
+                try {
+                    const response = await Axios.post(`http://fla-cvat-export.localdev.me/export/`, JSON.stringify(body), {
+                        proxy: config.proxy,
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    return response.data;
+                } catch (errorData) {
+                    throw generateError(errorData);
+                }
+            }
+
             async function callLambdaFunction(funId, body) {
                 const { backendAPI } = config;
 
@@ -1896,6 +1911,7 @@
                             status: getRequestStatus,
                             requests: getLambdaRequests,
                             run: runLambdaRequest,
+                            runTraining: runTraining,
                             call: callLambdaFunction,
                             cancel: cancelLambdaRequest,
                         }),

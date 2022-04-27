@@ -59,6 +59,32 @@ class LambdaManager {
         return result.id;
     }
 
+    async runTraining(taskID, model, args) {
+        if (!Number.isInteger(taskID) || taskID < 0) {
+            throw new ArgumentError(`Argument taskID must be a positive integer. Got "${taskID}"`);
+        }
+
+        if (!(model instanceof MLModel)) {
+            throw new ArgumentError(
+                `Argument model is expected to be an instance of MLModel class, but got ${typeof model}`,
+            );
+        }
+
+        if (args && typeof args !== 'object') {
+            throw new ArgumentError(`Argument args is expected to be an object, but got ${typeof model}`);
+        }
+
+        const body = {
+            ...args,
+            task: taskID,
+            function: model.id,
+        };
+        console.log(body)
+
+        const result = await serverProxy.lambda.runTraining(body);
+        return result.id;
+    }
+
     async call(taskID, model, args) {
         if (!Number.isInteger(taskID) || taskID < 0) {
             throw new ArgumentError(`Argument taskID must be a positive integer. Got "${taskID}"`);

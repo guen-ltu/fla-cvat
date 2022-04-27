@@ -7,6 +7,7 @@ import { AnyAction } from 'redux';
 import { AuthActionTypes } from 'actions/auth-actions';
 import { FormatsActionTypes } from 'actions/formats-actions';
 import { ModelsActionTypes } from 'actions/models-actions';
+import { ModelsTrainActionTypes } from 'actions/models-train-actions';
 import { ShareActionTypes } from 'actions/share-actions';
 import { TasksActionTypes } from 'actions/tasks-actions';
 import { ProjectsActionTypes } from 'actions/projects-actions';
@@ -811,6 +812,39 @@ export default function (state = defaultState, action: AnyAction): Notifications
                         canceling: {
                             message:
                                 'Could not cancel model inference for the ' +
+                                `<a href="/tasks/${taskID}" target="_blank">task ${taskID}</a>`,
+                            reason: action.payload.error.toString(),
+                        },
+                    },
+                },
+            };
+        }
+        case ModelsTrainActionTypes.GET_TRAIN_MODELS_FAILED: {
+            return {
+                ...state,
+                errors: {
+                    ...state.errors,
+                    models: {
+                        ...state.errors.models,
+                        fetching: {
+                            message: 'Could not get train models from the server',
+                            reason: action.payload.error.toString(),
+                        },
+                    },
+                },
+            };
+        }
+        case ModelsTrainActionTypes.START_TRAINING_FAILED: {
+            const { taskID } = action.payload;
+            return {
+                ...state,
+                errors: {
+                    ...state.errors,
+                    models: {
+                        ...state.errors.models,
+                        starting: {
+                            message:
+                                'Could not train model for the ' +
                                 `<a href="/tasks/${taskID}" target="_blank">task ${taskID}</a>`,
                             reason: action.payload.error.toString(),
                         },

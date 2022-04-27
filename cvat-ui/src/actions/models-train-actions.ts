@@ -12,6 +12,7 @@ export enum ModelsTrainActionTypes {
     GET_TRAIN_MODELS_FAILED = 'GET_TRAIN_MODELS_FAILED',
     SHOW_TRAIN_MODEL_DIALOG = 'SHOW_TRAIN_MODEL_DIALOG',
     CLOSE_TRAIN_MODEL_DIALOG = 'CLOSE_TRAIN_MODEL_DIALOG',
+    START_TRAINING_FAILED = 'START_TRAINING_FAILED',
 }
 
 export const modelsTrainActions = {
@@ -32,18 +33,40 @@ export const modelsTrainActions = {
     closeTrainModelDialog: () => createAction(
         ModelsTrainActionTypes.CLOSE_TRAIN_MODEL_DIALOG
     ),
+    startTrainingFailed: (taskID: number, error: any) => (
+        createAction(ModelsTrainActionTypes.START_TRAINING_FAILED, {
+            taskID,
+            error,
+        })
+    ),
 };
 
 export function startTrainingAsync(taskId: number, model: Model, body: object): ThunkAction {
     return async (dispatch): Promise<void> => {
-        alert("Train")
-        alert(taskId)
-        console.log(taskId)
-        console.log(model)
-        console.log(body)
-        // pass parameters
-        // copy full dialog with model and label selection
-        // do it via core.lambda or directly to REST?
+        try {
+            const requestID: string = await core.lambda.runTraining(taskId, model, body);
+            console.log(requestID)
+
+            // TODO block/notify when a training for the model is already running
+            // TODO add listener to notify when training is done
+
+            /*
+            const dispatchCallback = (action: ModelsActions): void => {
+                dispatch(action);
+            };*/
+
+            /*
+            listen(
+                {
+                    taskID: taskId,
+                    requestID,
+                },
+                dispatchCallback,
+            );*/
+        } catch (error) {
+            console.log(error)
+            dispatch(modelsTrainActions.startTrainingFailed(taskId, error));
+        }
     };
 }
 

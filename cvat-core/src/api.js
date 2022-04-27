@@ -569,6 +569,24 @@ function build() {
             },
 
             /**
+             * Run long-time training for a model on a specific task
+             * @method runTraining
+             * @async
+             * @memberof module:API.cvat.lambda
+             * @param {module:API.cvat.classes.Task} task task to be annotated
+             * @param {module:API.cvat.classes.MLModel} model model used to get annotation
+             * @param {object} [args] extra arguments
+             * @returns {string} requestID
+             * @throws {module:API.cvat.exceptions.ServerError}
+             * @throws {module:API.cvat.exceptions.PluginError}
+             * @throws {module:API.cvat.exceptions.ArgumentError}
+             */
+             async runTraining(task, model, args) {
+                const result = await PluginRegistry.apiWrapper(cvat.lambda.runTraining, task, model, args);
+                return result;
+            },
+
+            /**
              * Run short-time request for a function on a specific task
              * @method call
              * @async
