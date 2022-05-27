@@ -14,10 +14,10 @@ spec:
         app: cvat-opa # has to match .spec.selector.matchLabels
     spec:
       imagePullSecrets:
-      - name: regcred
+      - name: dockerhub-secret
       containers:
       - name: cvat-opa
-        image: guenltu/private:fla-cvat-opa
+        image: guenltu/fla:cvat-opa-0.1.0
         ports:
         - containerPort: 8181
           name: http

@@ -3,15 +3,15 @@
 # Declare variables to be passed into your templates.
 
 
-imagePullSecrets: [ name: regcred ]
+imagePullSecrets: [ name: dockerhub-secret ]
 nameOverride: ""
 fullnameOverride: ""
 
 cvat:
   backend:
     replicas: 1
-    image: guenltu/private
-    tag: fla-cvat-server-m1
+    image: guenltu/fla
+    tag: cvat-server-0.1.0-m1
     imagePullPolicy: IfNotPresent
     permissionFix:
       enabled: true
@@ -64,8 +64,8 @@ cvat:
         size: 20Gi
   frontend:
     replicas: 1
-    image: guenltu/private
-    tag: fla-cvat-ui-m1
+    image: guenltu/fla
+    tag: cvat-ui-0.1.0-m1
     imagePullPolicy: IfNotPresent
     labels: {}
     #  test: test

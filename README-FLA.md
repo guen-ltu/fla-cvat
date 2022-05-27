@@ -2,6 +2,8 @@
 
 ## Build own images
 
+execute from the project root
+
 ````
 # from project root
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml build
@@ -13,17 +15,16 @@ docker-compose -f docker-compose.yml -f docker-compose.dev.yml build cvat
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml build cvat_ui
 
 # re-tag and push
-docker tag <image-id> guenltu/private:fla-cvat-server-m1
-docker push guenltu/private:fla-cvat-server-m1
+# docker tag <image-id> guenltu/private:fla-cvat-server-m1
+docker push guenltu/fla:cvat-server-0.1.0-m1
 
-docker tag <image-id> guenltu/private:fla-cvat-ui-m1
-docker push guenltu/private:fla-cvat-ui-m1
+#docker tag <image-id> guenltu/private:fla-cvat-ui-m1
+docker push guenltu/fla:cvat-ui-0.1.0-m1
 ````
 
 ````
-# execute from the project root
-docker build --force-rm --tag guenltu/private:fla-cvat-opa --file Dockerfile.opa .
-docker push guenltu/private:fla-cvat-opa
+docker build --force-rm --tag guenltu/fla:cvat-opa-0.1.0 --file Dockerfile.opa .
+docker push guenltu/fla:cvat-opa-0.1.0
 ````
 
 

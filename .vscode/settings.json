@@ -1,4 +1,5 @@
 {
+    "editor.minimap.enabled": false,
     "eslint.probe": [
         "javascript",
         "typescript",
